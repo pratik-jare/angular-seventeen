@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgOptimizedImage, provideImgixLoader } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { UserComponent } from './user/user.component';
 import { DeferComponent } from './defer/defer.component';
@@ -7,9 +7,23 @@ import { DeferComponent } from './defer/defer.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [UserComponent, DeferComponent, CommonModule, RouterOutlet],
+  providers: [
+    provideImgixLoader('https://avatars.githubusercontent.com/u/'),
+  ],
+  imports: [UserComponent, DeferComponent, NgOptimizedImage, CommonModule, RouterOutlet],
   template: `
   {{title}}
+
+  <li>
+    Static Image:
+    <img ngSrc="/assets/139426.png" alt="Angular logo" height="32" width="32"/>
+  </li>
+  <li>
+    Dynamic Image:
+    <img [ngSrc]="logoUrl" [alt]="logoAlt" width="32" height="32" />
+  </li>
+
+
   <!-- <app-user></app-user> -->
   @if (isLoggedIn == 1) {
       <p>Welcome back, Friend!</p>
@@ -25,7 +39,7 @@ import { DeferComponent } from './defer/defer.component';
     }
     <img alt="photo" [src]="imageURL">
     <div [contentEditable]="false">
-      Sample Datag
+      Sample
       <input type="text" name="sample" id="">
     </div>
     <button (click)="greet()">greet</button>
@@ -119,6 +133,9 @@ export class AppComponent {
   isEditable = false;
   message = '';
   items = new Array();
+
+  logoUrl = '139426?s=48&v=4'
+  logoAlt = 'image src angular '
 
   greet() {
     this.message = 'Hello, there 👋';
