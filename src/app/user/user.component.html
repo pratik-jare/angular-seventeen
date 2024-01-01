@@ -7,3 +7,88 @@
 {{title}}
 
 <button class="btn" (click)="onClick()">Add Item</button>
+
+
+<h2>
+  Decimal Pipe 4.2-5
+  <br>{{ num }} =>
+  <br> {{ num | number:"4.2-5"}}
+</h2>
+
+<h2>
+  DatePipe
+  <br>
+  {{today}}
+
+  <hr>
+  {{today | date:'dd/MM/yyyy hh:mm:ss a'}}
+  <hr>
+  {{today | date}}
+
+</h2>
+
+<hr>
+<h2>Currency with "currency" {{ cost | currency}}</h2>
+<hr>
+<h2>Currency with "currency" {{ cost | currency}}</h2>
+<div>
+  <!--output '$0.26'-->
+  <p>currency ==> {{ cost | currency }}</p>
+  <!--output 'CA$0.26'-->
+  <p>currency : 'CAD' ==>{{ cost | currency : 'CAD' }}</p>
+  <!--output 'CAD0.26'-->
+  <p>currency : 'CAD' : 'code' ==> {{ cost | currency : 'CAD' : 'code' }}</p>
+  <!--output 'CA$0,001.35'-->
+  <p>currency : 'CAD' : 'symbol' : '4.2-2' ==> {{ cost | currency : 'CAD' : 'symbol' : '4.2-2' }}</p>
+  <!--output '$0,001.35'-->
+  <p>currency : 'CAD' : 'symbol-narrow' : '4.2-2' ==> {{ cost | currency : 'CAD' : 'symbol-narrow' : '4.2-2' }}</p>
+  <!--output '0 001,35 CA$'-->
+  <p>currency : 'CAD' : 'symbol' : '4.2-2' ==> {{ cost | currency : 'INR' }}</p>
+  <p>{{cost | currency:'local'}}</p>
+
+  <!--output 'CLP1' because CLP has no cents-->
+  <p>currency : 'CLP' ==> {{ cost | currency : 'CLP' }}</p>
+
+
+      <!--output '0 001,35 CA$'-->
+      <p>currency : 'CAD' : 'symbol' : '4.2-2' : 'fr' ==> {{ cost | currency : 'CAD' : 'symbol' : '4.2-2' : 'fr' }}</p>
+</div>
+<hr>
+
+
+
+<div>
+  <!--output '26%'-->
+  <p>percent ==>{{ marks | percent }}</p>
+  <!--output '0,134.950%'-->
+  <p>percent : '2.2-5' ==> {{ marks | percent : '2.2-5' }}</p>
+</div>
+<hr>
+<div>
+  <p>Without JSON pipe:</p>
+  <pre>{{ object }}</pre>
+  <p>With JSON pipe:</p>
+  <pre>{{ object | json }}</pre>
+</div>
+<hr>
+
+<div>
+  <code>promise|async</code>
+  :
+  <button (click)="clicked()">{{ arrived ? 'Reset' : 'Resolve' }}</button>
+  <span>Wait for it... {{ greeting | async }}</span>
+</div>
+
+
+<div><code>observable|async</code>: Time: {{ time | async }}</div>
+
+
+<h2>userServiceWayOne inject without Constructor</h2>
+@for (item of userServiceWayOne.userNames; track $index) {
+<p>{{item | uppercase }}</p>
+}
+
+<h2>user Service Way Two Constructor </h2>
+@for (item of userList; track $index) {
+<p> {{item | star }}</p>
+}
